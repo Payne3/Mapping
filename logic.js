@@ -38,6 +38,6 @@ d3.json(URL, function(data) {
 // Creating map object
 var map = L.map("map-id", {
   center: [40.7128, -74.0059],
-  zoom: 11,
+  zoom: 3,
   layers: [streetmap]
 });
