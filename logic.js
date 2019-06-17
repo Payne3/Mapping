@@ -17,23 +17,59 @@ var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
 
 var URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson"
 
-var geojsonMarkerOptions = {
-  radius: 8,
-  fillColor: "#ff7800",
-  color: "#000",
-  weight: 1,
-  opacity: 1,
-  fillOpacity: 0.8
+// var geojsonMarkerOptions = {
+//   radius: markerSize(feature.properties.mag),
+//   fillColor: "#ff7800",
+//   color: "#000",
+//   weight: 1,
+//   opacity: 1,
+//   fillOpacity: 0.8
+// };
+
+function markerSize(magnitude) {
+  return magnitude *5;
 };
 
-d3.json(URL, function(data) {
+
+// d3.json(URL, function (data) {
+//   // Creating a GeoJSON layer with the retrieved data
+//   L.geoJson(data, {
+//     pointToLayer: function (feature, latlng) {
+//       return L.circleMarker(latlng);
+//     }
+//     }).addTo(map);
+// });
+
+// function markerOptions(options) {
+
+//   var sizing = L.geoJson(options, {
+//     style : function(feature) {
+//       return {
+//         fillColor: chooseColor(feature.property.mag),
+//         radius: feature.property.mag,
+//       }
+//     }
+//   })
+// }; markerOptions(sizing);
+
+d3.json(URL, function (data) {
   // Creating a GeoJSON layer with the retrieved data
   L.geoJson(data, {
     pointToLayer: function (feature, latlng) {
-      return L.circleMarker(latlng, geojsonMarkerOptions);
+      return L.circleMarker(latlng, {
+        radius: markerSize(feature.properties.mag),
+        fillColor: "#ff7800",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      });
     }
-    }).addTo(map);
-  });
+  }).addTo(map);
+});
+
+
+
 
 // Creating map object
 var map = L.map("map-id", {
