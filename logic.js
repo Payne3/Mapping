@@ -10,12 +10,12 @@ var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
 });
 
 
-var URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson"
+var URL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_week.geojson"
 
 
-
+// function to get data driven styling for circle radius
 function markerSize(magnitude) {
-  return magnitude *5;
+  return magnitude *2;
 };
 
 
